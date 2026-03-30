@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gravity Escape - Challenge Mode</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Canvas -->
+        <canvas id="gameCanvas" width="1000" height="600"></canvas>
+        
+        <!-- UI Overlays -->
+        <div id="ui-layer">
+            
+            <!-- In-Game HUD -->
+            <div id="hud">
+                <div class="stat-left">
+                    <div>LIVES: <span id="lives">3</span></div>
+                    <div id="distance-container">DIST: <span id="distance">0</span>m</div>
+                </div>
+                <div class="stat-right">
+                    <div>SCORE: <span id="score">0</span></div>
+                    <div class="high-score-text">BEST: <span id="high-score">0</span></div>
+                </div>
+            </div>
+
+            <!-- In-Game floating messages (e.g. New High Score!) -->
+            <div id="message-overlay" class="hidden">
+                <h2 id="floating-msg" class="glow-msg">NEW HIGH SCORE!</h2>
+            </div>
+
+            <!-- Instruction Banner -->
+            <div id="instruction-overlay" class="overlay-text hidden">
+                <p>Press SPACE to reverse gravity</p>
+            </div>
+
+            <!-- Pre-Game Countdown -->
+            <div id="countdown-screen" class="overlay hidden">
+                <h1 id="countdown-text" class="glow-title">3</h1>
+            </div>
+            
+            <!-- Main Difficulty Select Menu -->
+            <div id="start-screen" class="overlay">
+                <h1 class="glow-title">GRAVITY ESCAPE</h1>
+                <p class="subtitle">Select Difficulty</p>
+                <div class="diff-grid">
+                    <div class="diff-card" id="card-easy">
+                        <h3>EASY</h3>
+                        <p>Slow | 3 Lives</p>
+                        <p class="hs-display">Best: <span id="hs-easy">0</span></p>
+                        <button class="btn-diff btn-cyan" data-diff="easy">PLAY</button>
+                    </div>
+                    <div class="diff-card locked" id="card-medium">
+                        <h3>MEDIUM</h3>
+                        <p>Fast | 2 Lives | Movers</p>
+                        <p class="unlock-req">Survive 30s in Easy</p>
+                        <p class="hs-display hidden">Best: <span id="hs-medium">0</span></p>
+                        <button class="btn-diff btn-purple disabled" data-diff="medium">🔒 LOCKED</button>
+                    </div>
+                    <div class="diff-card locked" id="card-hard">
+                        <h3>HARD</h3>
+                        <p>Rapid | 1 Life | Chaos</p>
+                        <p class="unlock-req">Survive 45s in Med</p>
+                        <p class="hs-display hidden">Best: <span id="hs-hard">0</span></p>
+                        <button class="btn-diff btn-red disabled" data-diff="hard">🔒 LOCKED</button>
+                    </div>
+                    <div class="diff-card locked" id="card-veryhard">
+                        <h3>VERY HARD</h3>
+                        <p>Insane | 0 Lives | Fakes</p>
+                        <p class="unlock-req">Survive 60s in Hard</p>
+                        <p class="hs-display hidden">Best: <span id="hs-veryhard">0</span></p>
+                        <button class="btn-diff btn-darkred disabled" data-diff="veryhard">🔒 LOCKED</button>
+                    </div>
+                </div>
+                <!-- AI Feature (Global) -->
+                <button id="btn-ai" class="btn-ai-play">Watch AI Play (Demo)</button>
+            </div>
+            
+            <!-- Game Over Menu -->
+            <div id="game-over-screen" class="overlay hidden">
+                <h1 id="end-title" class="glow-title text-magenta">GAME OVER</h1>
+                <p id="end-subtitle">You hit an obstacle!</p>
+                <div class="end-stats">
+                    <p>Distance: <span id="end-dist">0</span>m</p>
+                    <p>Score: <span id="end-score">0</span></p>
+                </div>
+                <div class="buttons">
+                    <button id="btn-restart" class="btn-primary">Restart</button>
+                    <button id="btn-menu" class="btn-secondary">Main Menu</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Audio Placeholders -->
+    <div id="audio-manager" style="display:none;">
+        <audio id="sfx-jump" src=""></audio>
+        <audio id="sfx-hit" src=""></audio>
+        <audio id="sfx-score" src=""></audio>
+        <audio id="sfx-unlock" src=""></audio>
+        <audio id="bgm" loop src=""></audio>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
